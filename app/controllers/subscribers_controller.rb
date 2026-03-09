@@ -1,9 +1,9 @@
-class SubscibersController < ApplicationController
+class SubscribersController < ApplicationController
   allow_unauthenticated_access
   before_action :set_product
 
   def create
-    @product.subscribers.build(subscriber_params).first_or_create
+    @product.subscribers.where(subscriber_params)
     redirect_to @product, notice: "Subscribed successfully!"
   end
 
@@ -13,6 +13,6 @@ class SubscibersController < ApplicationController
     end
 
     def subscriber_params
-      params.require(:subscriber).permit(:email)
+      params.require(:subscriber).permit(subscriber: [ :email ])
     end
 end

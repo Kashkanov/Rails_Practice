@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  include Notifications
+
   has_many :subscribers, dependent: :destroy  # This tells Rails how to join queries between the two database tables
   has_one_attached :featured_image
   has_rich_text :description
